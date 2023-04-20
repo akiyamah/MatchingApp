@@ -87,14 +87,14 @@
 ### 開発フェーズ
 フロントエンドおよびバックエンドの技術スタックを決定し、実際にサービスを開発します。
 
-フロントエンド: HTML,CSS,Typescript,Vue.js 
-バックエンド: Python,Django,
+`フロントエンド`: HTML,CSS,Typescript,Vue.js 
+`バックエンド`: Python,Django,
 ```
 pip install Django
 pip install django-allauth
 pip install Pillow
 ```
-データベース: PostgreSQL,(開発ではSQLite)
+`データベース`: PostgreSQL,(開発ではSQLite)
 
 ### テストフェーズ
 サービスの品質確保のために、ユニットテストや統合テストを実施します。

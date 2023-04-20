@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+    <div class="h2">プロフィール設定</div>
+{% endblock %}
+{% block content %}
+
+
+    <!-- プロフィール情報 -->
+    <div class="card mt-4">
+        <div class="card-body" style="background-color: #f8f9fa;">
+            <h5 class="card-title">プロフィール情報</h5>
+            <p class="card-text">プロフィール情報を更新して自分をアピールしましょう。</p>
+            <!-- メッセージ -->
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form method="post" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form.visible_fields %}
+                <!-- プロフィール情報フォーム -->
+                <div class="card mt-4">
+                    <div class="card-body" style="background-color: #e9ecef;">
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div class="col-md-10">
+                                {% if field.name == "goals" or field.name == "preferred_areas" or field.name == "hobbies" %}
+                                    <div class="row">
+                                        {% for choice in field %}
+                                            <div class="col-md-3">
+                                                {{ choice }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% elif field.field.widget.input_type == "file" %}
+                                    <!-- 画像表示コード -->
+                                    {% if field.value %}
+                                        <img src="{{ field.value.url }}" alt="{{ field.label }}" width="100" height="100">
+                                        <a href="{% url 'accounts:delete_image' forloop.counter0 %}" class="btn btn-danger">削除</a>
+                                    {% else %}
+                                        <p>No image uploaded.</p>
+                                    {% endif %}
+                                    <!-- ファイルパスの非表示 -->
+                                    <input type="file" name="{{ field.html_name }}" id="{{ field.auto_id }}" style="display: none;">
+                                    <label for="{{ field.auto_id }}" class="btn btn-primary">画像を選択</label>
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
+                                {{ field.errors }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+                <!-- 更新ボタンの追加 -->
+                <div class="form-group mt-4">
+                  <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-primary">更新</button>
+                  </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

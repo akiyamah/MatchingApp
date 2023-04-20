@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount', # 追加
     'allauth.socialaccount.providers.google', # 追加
     'accounts' # 追加
+    #'user_profile',
     #'main'
 ]
 
@@ -100,6 +101,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

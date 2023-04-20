@@ -86,34 +86,23 @@
 
 ### 開発フェーズ
 フロントエンドおよびバックエンドの技術スタックを決定し、実際にサービスを開発します。
-・Python
+
+#### フロントエンド
+HTML,CSS,Typescript,Vue.js 
+
+#### バックエンド
+Python,Django,
 ```
 pip install Django
 pip install django-allauth
 pip install Pillow
 ```
-requrements.txt
-```
-asgiref==3.6.0
-certifi==2022.12.7
-cffi==1.15.1
-charset-normalizer==3.1.0
-cryptography==40.0.2
-defusedxml==0.7.1
-Django==4.2
-django-allauth==0.54.0
-idna==3.4
-oauthlib==3.2.2
-Pillow==9.5.0
-pycparser==2.21
-PyJWT==2.6.0
-python3-openid==3.2.0
-requests==2.28.2
-requests-oauthlib==1.3.1
-sqlparse==0.4.3
-urllib3==1.26.15
 
-```
+#### データベース
+PostgreSQL
+(開発ではSQLite)
+
+
 ### テストフェーズ
 サービスの品質確保のために、ユニットテストや統合テストを実施します。
 
@@ -124,3 +113,6 @@ urllib3==1.26.15
 ソーシャルメディアや広告を活用して、サービスの認知度を高め、ユーザー獲得を行います。
 フィードバックの収集・改善ユーザーからのフィードバックを収集し、サービスの改善に反映します。
 この合コンマッチングサービスは、効率的な出会いと新しい友達作りを目指すユーザーに、安心・安全で楽しい経験を提供することを目的としています。
+
+
+# 基本設計

@@ -1,7 +1,13 @@
 from pathlib import Path
 import os
+import environ
+from decouple import config
+from dj_database_url import parse as dburl
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(os.join.path(BASE_DIR, '.env'))
 
 SECRET_KEY = 'django-insecure-h(gd%^y(9$#nn%&kau3@9h-0-n!t%)3ly944$9vva4x!y@7roe'
 
@@ -30,6 +36,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -39,7 +46,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'PetMatch.urls'
-
+ 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -58,11 +65,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PetMatch.wsgi.application'
 
+default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': config("DATABASE_URL", default=default_dburl)
 }
 
 
@@ -106,6 +111,9 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 STATIC_URL = 'static/'
+STATIC_Root = str(BASE_DIR / "staticfiles")
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -126,3 +134,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+
+
+SUPERUSER_NAME = env('SUPERUSER_NAME')
+SUPERUSER_EMAIL = env('SUPERUSER_EMAIL')
+SUPERUSER_PASSWORD = env('SUPERUSER_PASSWORD')

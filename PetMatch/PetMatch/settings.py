@@ -4,10 +4,9 @@ import environ
 from decouple import config
 from dj_database_url import parse as dburl
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
-environ.Env.read_env(os.join.path(BASE_DIR, '.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = 'django-insecure-h(gd%^y(9$#nn%&kau3@9h-0-n!t%)3ly944$9vva4x!y@7roe'
 
@@ -46,7 +45,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'PetMatch.urls'
- 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,7 +66,7 @@ WSGI_APPLICATION = 'PetMatch.wsgi.application'
 
 default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
 DATABASES = {
-    'default': config("DATABASE_URL", default=default_dburl)
+    'default': config("DATABASE_URL", default=default_dburl, cast=dburl)
 }
 
 
@@ -136,6 +135,6 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 
-SUPERUSER_NAME = env('SUPERUSER_NAME')
-SUPERUSER_EMAIL = env('SUPERUSER_EMAIL')
-SUPERUSER_PASSWORD = env('SUPERUSER_PASSWORD')
+SUPERUSER_NAME = env("SUPERUSER_NAME") 
+SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
+SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")

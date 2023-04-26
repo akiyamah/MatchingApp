@@ -4,6 +4,7 @@ from django.conf import settings
 
 
 User = get_user_model()
+
 class Command(BaseCommand) :
     def handle(self,*args, **options):
         if not User.objects. filter(username=settings .SUPERUSER_NAME).exists() :

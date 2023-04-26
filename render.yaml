@@ -2,17 +2,16 @@ databases:
   - name: django_render_db
     databaseName: django_render_db 
     user: django_user
-    regiom: singapore
-    plann: free
+    region: singapore
+    plan: free
 
 services:
   - type: web
     name: django_render
     env: python
-    regiom: singapore
-    healthCheckpath: /
-    plann: free
-    baranch: test
+    region: singapore
+    plan: free
+    branch: test
     buildCommand: "./build.sh"
     startCommand: "gunicorn mysite.wsgi:application"
     envVars:
